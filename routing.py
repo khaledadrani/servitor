@@ -66,7 +66,7 @@ class Router:
             connection.resp_status_code = 405
             return await connection.send(b"", finish=True)
         except NotFound:
-            pass
+            return await connection.send(b"Not Found", finish=True)
         else:
             handler = self.endpoint_to_handler[rule.endpoint]
             res = await handler(connection, **args)
